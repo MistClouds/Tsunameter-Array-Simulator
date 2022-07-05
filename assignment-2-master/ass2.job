@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --job-name=assigment_2_job_jl	 ### name your job 
+#SBATCH --time=00:30:00			 ### HH:MM:SS
+#SBATCH --mem=32G				 ### memory setting is max @ 4 GB per core
+#SBATCH --ntasks=5	 
+#SBATCH --cpus-per-task=1		 
+#SBATCH --ntasks-per-node=5	
+#SBATCH --nodes=1			
+		
+#SBATCH --partition=short,comp,gpu
+
+module load openmpi/3.1.6-ucx
+
+make clean
+make full
+mpirun -n 5 ./ass2.o 2 2 6800 -i 10
+
+exit 0
